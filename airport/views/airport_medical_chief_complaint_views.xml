@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="airport_medical_chief_complaint_action" model="ir.actions.act_window">
+        <field name="name">主訴</field>
+        <field name="res_model">airport.medical.chief.complaint</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="airport_medical_chief_complaint_view_tree" model="ir.ui.view">
+        <field name="name">airport.medical.chief.complaint.tree</field>
+        <field name="model">airport.medical.chief.complaint</field>
+        <field name="arch" type="xml">
+            <tree string="Channel" editable="bottom">
+                <field name="name" string="主訴名稱"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="airport_medical_chief_complaint_view_form" model="ir.ui.view">
+        <field name="name">airport.medical.chief.complaint.form</field>
+        <field name="model">airport.medical.chief.complaint</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <field name="name" string="主訴名稱"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

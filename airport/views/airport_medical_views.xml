@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="airport_medical_action" model="ir.actions.act_window">
+        <field name="name">出診單</field>
+        <field name="res_model">airport.medical</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="airport_medical_view_tree" model="ir.ui.view">
+        <field name="name">airport.medical.tree</field>
+        <field name="model">airport.medical</field>
+        <field name="arch" type="xml">
+            <tree string="Channel" >
+                <field name="name" string="病人姓名" />
+                <field name="sex_id" string="性別" />
+                <field name="nationality_id" string="國籍" />
+                <field name="notification_time" string="通報時段" />
+                <field name="chief_complaint_id" string="主訴" />
+                <field name="icd10_category_id" string="類別" />
+                <field name="attending_physician_id" string="處置醫師" />
+                <field name="tst" string="隨行護士" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="airport_medical_view_form" model="ir.ui.view">
+        <field name="name">airport.medical.form</field>
+        <field name="model">airport.medical</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <h1>
+                        <field name="name" placeholder="姓名"/>
+                        <button name="button_add_info" string="" icon="fa-camera" type="object" class="oe_highlight"/>
+                    </h1>
+                    <group>
+                        <separator />
+                        <group>
+                            <field name="identity_id" widget="radio" options="{'horizontal': true}" string="身分"/>
+                            <field name="birthday" string="生日"/>
+                            <field name="sex_id"  widget="radio" options="{'horizontal': true}" string="性別"/>
+                            <field name="password_no" string="護照號碼"/>
+                            <field name="nationality_id" string="國籍" />
+                            <field name="Date" string="日期"/>
+                            <field name="Address" string="地址"/>
+                            <field name="Phone" string="聯絡電話"/>
+                           <!-- <field name="come_reason_id" string="為何至機場"/>
+                           <field name="race_id" string="種族" />-->
+                        </group>
+                        <group>
+
+                            <field name="airport_co_id" string="航空公司"/>
+                            <field name="Airplane" string="班機"/>
+                            <field name="exit_id" widget="radio" options="{'horizontal': true}" string="出入境"/>
+                            <field name="departure_id" string="啟程地"/>
+                            <field name="passing_id" string="經過地"/>  
+                            <field name="arrival_id" string="目的地"/>               
+                        </group>
+                    </group>
+                    <separator />
+                    <notebook>
+                        <page string="電傳文件" >
+                            <group>             
+                                <group>
+                                <field name="notify_staff" string="通報人員" /> 
+                                </group>
+                                <group>
+                                <group>
+                                <group>
+                                <field name="immigration_status1" string="出境" />
+                                </group>
+                                <group>
+                                <field name="immigration_status2" string="入境" />
+                                </group>
+                                </group>
+                                <group>
+                                <field name="immigration_status3" string="過境" />
+                                </group>
+                                </group>
+
+                                <group>
+                                <group>
+                                <field name="notification_time" string="通報時間" />
+                                </group>
+                                <group>
+                                <button name="refresh_time" string="refresh" type="object" class="btn-primary"/>
+                                </group>
+                                </group>
+
+                                <group>
+                                <group>
+                                <field name="clinic_time" string="診療時間" />
+                                </group>
+                                <group>
+                                <button name="refresh_time1" string="refresh" type="object" class="btn-primary"/>
+                                </group>
+                                </group>
+
+                                <group>
+                                    <field style="border: 0.3px solid black;" name="initial_diagnosis" string="初步診斷" />
+                                </group>
+
+                            </group>
+                                 <group string="診斷結果ICD10病名">
+                                    <group>
+                                        <field name="icd10_category_id" string="類別"/>
+                                    </group>
+                                    <group>
+                                        <field name="icd10_category1_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',1)]}" />
+                                        <field name="icd10_category2_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',2)]}" />
+                                        <field name="icd10_category3_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',3)]}" />
+                                        <field name="icd10_category4_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',4)]}" />
+                                        <field name="icd10_category5_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',5)]}" />
+                                        <field name="icd10_category6_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',6)]}" />
+                                        <field name="icd10_category7_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',7)]}" />
+                                        <field name="icd10_category8_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',8)]}" />
+                                        <field name="icd10_category9_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',9)]}" />
+                                        <field name="icd10_category10_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',10)]}" />
+                                        <field name="icd10_category11_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',11)]}" />
+                                        <field name="icd10_category12_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',12)]}" />
+                                        <field name="icd10_category13_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',13)]}" />
+                                        <field name="icd10_category18_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',18)]}" />
+                                    </group>
+                                </group>
+                               
+                                
+                                
+                                                       
+                                <group string="後續結果">
+                                    <field name="follow_up_results" string="後續結果" />
+                                </group>
+
+                            <group string="其他事宜">
+                                <group>
+                                <field name="medical_bills" string="醫療費用收費" />
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                <group>
+                                <field name="medical_bills_yes" string="是" attrs="{'readonly': [('medical_bills_no', '=', True)]}" />
+                                </group>
+                                <group>
+                                <field name="medical_bills_no" string="否" attrs="{'readonly': [('medical_bills_yes', '=', True)]}" />
+                                </group>
+                                </group>
+                                <group>
+                                <field name="charge_amount" string="收費金額" attrs="{'invisible': [('medical_bills_yes', '=', False)]}"/>
+                                </group>
+                                <group>
+                                <field name="attending_physician_id" string="醫師" />
+                                </group>
+                                <group>
+                                <field name="tst" string="護士" />
+                                </group>
+                                <group string="TO:桃園國際機場股份有限公司營運安全處">
+                                <field name="T1_telephone_number_of_Operation_Safety_Department" string="T1-032733578" />
+                                <field name="T2_telephone_number_of_Operation_Safety_Department" string="T2-032733367" />
+                                </group>
+                                <group string="From:聯新國際醫院桃園國際機場醫療中心">
+                                <field name="Medical_Center_T1_Telephone" string="T1-033834225" />
+                                <field name="Medical_Center_T2_Telephone" string="T2-033983485" />
+                                </group>
+                                </group>
+                        </page>
+                         <page string="護理紀錄" >
+                            <group>
+                                <group>
+                                    <field name="tst" string="護士" required='false' />
+                                    <field name="content" string="內容" style="border: 1px solid black;"/>
+                                </group>
+                            </group> 
+                             <table style="margin-left:200px;">
+                                <button name="record" string="紀錄" icon="fa-check" type="object" attrs="{'invisible': [('content', '=', False)]}" groups='airport.airport_group_nurse'/>
+                                <button name="reset" string="重寫" icon="fa-times" type="object" attrs="{'invisible': [('content', '=', False)]}" groups='airport.airport_group_nurse'/>
+                            </table>      
+                            <group>
+                                <field name="current_time"/>
+                                <field name="display_content" readonly="1"/>
+                                <field name="total_record_count"/>
+                            </group>
+                        </page>
+                        <page string="醫療紀錄">
+                           <group>
+                                <group string="病情摘要" style="font-size:16px">
+                                    <field name="chief_complaint_id" string="主訴" />
+                                </group>
+                            </group>
+                                <group  string="生命跡象" style="font-size:16px">
+                                <group>
+                                     <group>
+                                         <field name="temperature" string="體溫(℃)" placeholder="輸入兩位整數和一位小數點"/>
+                                     </group> 
+                                
+                                     <group>
+                                         <field name="temperature_status" string="體溫狀態" readonly="1"/>
+                                     </group> 
+                                     <group>
+                                         <field name="pulse" string="脈搏(次/min)" />
+                                     </group> 
+                                     <group>
+                                         <field name="breath" string="呼吸(次/min)" />
+                                     </group> 
+                                     <group>
+                                         <field name="blood_pressureh" string="血壓(mmHg)" />
+                                     </group> 
+                                     <group>
+                                         <field name="blood_oxygen" string="血氧(%)" />
+                                     </group> 
+                                     <group>
+                                         <field name="consciousness" string="意識" />
+                                     </group> 
+                                     <group>
+                                    
+                                     </group> 
+                                     <group>
+                                         <field name="is_active1" string="Clear" attrs="{'readonly': [('is_active2', '=', True)]}"/>
+                                     </group> 
+                                     <group>
+                                         <field name="is_active2" string="GCS" attrs="{'readonly': [('is_active1', '=', True)]}"/>
+                                     </group> 
+                                     <group>
+                                     </group> 
+                                     <group name="input_group" attrs="{'invisible': [('is_active2', '=', False)]}">
+                                         <field name="input_field_E" string="睜眼反應(E)"/>
+                                         <field name="input_field_V" string="語言反應(V)"/>
+                                         <field name="input_field_M" string="動作反應(M)"/>
+                                         <field name="total_score"/>
+                                         <field name="comatose_level"/>
+                                     </group>
+                                </group>
+                                </group>
+                                <group string="過去病史" style="font-size:16px">
+                           
+                                    <!--藥物過敏-->
+                                     <group>
+                                         <field name="allergy" string="藥物過敏" />
+                                     
+                                         <field name="is_active4" string="有" attrs="{'readonly': [('is_active3', '=', True)]}"/>
+                                    
+                                         <field name="is_active3" string="無" attrs="{'readonly': [('is_active4', '=', True)]}"/>
+    
+                                         <field name="input_field" string="名稱" attrs="{'invisible': [('is_active4', '=', False)]}"/>
+                                     </group>
+                                     <!--過去病史-->
+                                     <group>
+                                         <field name="allergy1" string="過去病史" />
+                       
+                                         <field name="is_yes" string="有" attrs="{'readonly': [('is_no', '=', True)]}"/>
+                          
+                                         <field name="is_no" string="無" attrs="{'readonly': [('is_yes', '=', True)]}"/>
+                      
+                                         <field name="input_field1" string="名稱" attrs="{'invisible': [('is_yes', '=', False)]}"/>
+                                     </group>
+                               
+                                </group>
+                                <group string="身體檢查" style="font-size:16px">
+                                    <group>
+                                    <group>
+                                        <field name="head" string="頭頸部"/>
+                                    </group> 
+                                    <group>
+                                        <field name="chest" string="胸部"/>
+                                    </group> 
+                                    <group>
+                                        <field name="abdomen" string="腹部"/>
+                                    </group> 
+                                    <group>
+                                        <field name="limbs" string="四肢"/>
+                                    </group> 
+                                    <group>
+                                        <field name="other" string="其他"/>
+                                    </group> 
+                              
+                                    </group>
+                                </group>
+                                <group string="初步診斷結果" style="font-size:16px">
+                                    <group>
+                                    <group>
+                                        <field name="diagnosis_id" string="初步診斷" />
+                                    </group> 
+                                    <group>
+                                        <field name="diagnosis_1" string="" />
+                                    </group> 
+                                    </group>                  
+                                </group>
+                                <group string="處理摘要" style="font-size:16px">
+                                    <group>
+                                    <group>
+                                        <field name="Quadruple_single" string="簽四聯單"/>
+                                    </group> 
+                                    <group>
+                                         <field name="referral" string="建議轉診"/>
+                                    </group> 
+                                    <group>
+                                    </group>
+                                    <group name="input_group" attrs="{'invisible': [('referral', '=', False)]}">
+                                         <field name="input_field_hospital" string="轉診醫院"/>
+                                    </group>
+                                    </group>
+                                    <group>
+                                    <group>
+                                         <field name="attending_physician_id" string="醫師" />
+                                    </group>
+                                    
+                                    </group>
+                                </group>
+                                <group string="傷口照片" style="font-size:16px">
+                                    <group style="width:350px">
+                                     <group>
+                                         <field name="photo" widget="image" filename="name" string="照片1" style="border:2px solid black; background-color:	#F1E1FF;"/>
+                                    </group> 
+                                    <group>
+                                         <field name="photo1" widget="image" filename="name" string="照片2" style="border:2px solid black; background-color:#F1E1FF;"/>
+                                    </group> 
+                                    </group>
+                                </group>           
+                        </page>
+                        <page string="診斷證明">
+                        <group string="診斷結果">
+                            <group>
+                                <field name="icd10_category_id" string="類別"/>
+                            </group>
+                            <group>
+                                <field name="icd10_category1_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',1)]}" />
+                                <field name="icd10_category2_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',2)]}" />
+                                <field name="icd10_category3_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',3)]}" />
+                                <field name="icd10_category4_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',4)]}" />
+                                <field name="icd10_category5_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',5)]}" />
+                                <field name="icd10_category6_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',6)]}" />
+                                <field name="icd10_category7_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',7)]}" />
+                                <field name="icd10_category8_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',8)]}" />
+                                <field name="icd10_category9_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',9)]}" />
+                                <field name="icd10_category10_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',10)]}" />
+                                <field name="icd10_category11_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',11)]}" />
+                                <field name="icd10_category12_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',12)]}" />
+                                <field name="icd10_category13_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',13)]}" />
+                                <field name="icd10_category18_id" string="疾病名" attrs="{'invisible':[('icd10_category_id','!=',18)]}" />
+                            </group>
+                        </group>
+                        <group string="醫師囑言備註">
+                            <group>
+                                <group>
+                                    <field name="comment_id" string="醫師囑言"/>
+                                </group>
+                                <group>
+                                    <field name="comment2" string="-" />
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="comment3" string="-" />
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+                        </group>
+                        <group>
+                             <field style="height:55px; border: 0.3px solid black;" name="doctor_remark" string="備註" />
+                        </group>
+                        <group  string="簽署">
+                            <group style="width:1000px">
+                                <group>
+                                    <field name="sup_sign" widget="signature" string="院長簽名"/>
+                                </group> 
+                                
+                                <group>
+                                    <field name="doctor_sign" widget="signature" string="診治醫師簽名" />
+                                </group> 
+                                
+                            </group>
+                        </group>
+                        </page>
+                        <page string="醫療收費" >
+                            <group>
+                                <group string="疾病管制署篩檢">
+                                    <field name="assistscreening" string="協助篩檢" />
+                                    <field name="throat" string="喉嚨採檢" />
+                                    <field name="blood" string="抽血採檢" />
+                                    <field name="otheropinion" string="其他" />
+                                    <field name="otheropinionname" string="名稱" attrs="{'invisible': [('otheropinion', '=', False)]}"/>
+                                </group>
+                                <group string="健康評估">
+                                    <field name="name" string="姓名"  />
+                                    <field name="relation" string="關係"  />
+                                    <field name="temperature" string="體溫"  />
+                                </group>
+                            </group>
+                            <group string="轉診後送">
+                                <group>
+                                    <group>
+                                        <field name="generally" string="一般通關" />
+                                    </group>
+                                    <group>
+                                        <field name="urgent" string="緊急通關" />
+                                    </group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="businessdoor" string="公務門" />
+                                    </group>
+                                    <group>
+                                        <field name="apron" string="機坪" />
+                                    </group>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="救護車">
+                                    <field name="medicalcenter" string="醫療中心" />
+                                    <field name="folk" string="民間" />
+                                    <field name="folkyesno" string="民間名稱" attrs="{'invisible': [('folk', '=', False)]}"/>
+                                    <field name="firebrigade" string="消防隊" />
+                                    <field name="firebrigadeyesno" string="消防隊名稱" attrs="{'invisible': [('firebrigade', '=', False)]}"/>
+                                </group>
+                                <group string="轉送">
+                                    <field name="transferhospital" string="轉送醫院"  />
+                                    <field name="carattendant" string="隨車人員" />
+                                </group>
+                            </group>
+                            <group string="醫療費用">
+                                <field name="visitfee" string="出診費"/>
+                                <field name="ambulancefee" string="救護車費用"/>
+                            </group>
+                            <group>
+                                <group string="自付">
+                                    <field name="selfpay" string="自付"/>
+                                    <field name="selfpayyes" string="費用"  attrs="{'invisible': [('selfpay', '=', False)]}"/>
+                                </group>
+                                <group string="請款">
+                                    <field name="pleasepay" string="請款"/>
+                                    <field name="pleasepayyes" string="費用" attrs="{'invisible': [('pleasepay', '=', False)]}"/>
+                                </group>
+                            </group>
+                            <group string="自付">
+                                <field name="cash" string="現金" />
+                                <field name="twd" string="台幣" attrs="{'invisible': [('cash', '=', False)]}" />
+                                <field name="currencies" string="幣別"  attrs="{'invisible': [('cash', '=', False)]}"/>
+                                <field name="afterexchange" string="兌換後台幣金額"  attrs="{'invisible': [('cash', '=', False)]}" />
+                                <field name="creditcard" string="刷卡" />
+                                <field name="abnormal" string="收費異常" />
+                                <field name="abnormalreason" string="收費異常原因" />
+                            </group>
+                            <group string="統一請款">
+                                <field name="applicant" string="申請人" />
+                                <field name="applicantunit" string="申請單位"/>
+                                <field name="phonenumber" string="連絡電話"/>
+                            </group>
+                            <group string="了解醫護人員說明醫療收費之原由且同意">
+                                <group>
+                                    <field name="agreeperson" widget="signature" string="同意人簽名/身分" />
+                                </group>
+                                <group>
+                                    <field name="witness" widget="signature" string="見證人簽名/身分"/>
+                                </group>
+                            </group>
+                            <group string="我同意轉診至醫院接受治療，且同意醫療中心安排之救護車前往並付費">
+                                <group>
+                                    <field name="agreeperson1" widget="signature" string="同意人簽名/身分" />
+                                </group>
+                                <group>
+                                    <field name="witness1" widget="signature" string="見證人簽名/身分"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="attending_physician_id" string="醫師" />
+                                <field name="tst" string="護理師"/>
+                                <field name="emt" string="EMT"/>
+                            </group>
+                        </page>
+                        <page string="通報作業"> <!--廖庭萱test-->
+                            <group string="落地時間紀錄">
+                                    <field name="landing_time_yesno" string="是否落地"  />
+                                    <field name="landing_time" string="落地時間" attrs="{'invisible': [('landing_time_yesno', '=', False)]}"/>
+                                    <button name="refresh_landing_time" string="REFRESH" type="object" class="btn-primary" attrs="{'invisible': [('landing_time_yesno', '=', False)]}"/>
+                            </group>
+                            <group  string="通報紀錄">
+                                    <group>
+                                        <field name="informing_time"   string="通報時間" style="width:20em;"/>
+                                        
+                                    </group>
+                                    <group>
+                                        <button name="refresh_informing_time" string="refresh" type="object" class="btn-primary"/>
+                                    </group>
+                                    <group>
+                                        <field name="reporting_unit" string="通報單位"/>
+                                        <field name="reporting_unit_personnel" string="通報人員"/>
+                                        <field name="reporting_unit_personnel_phone" string="電話"/>
+                                    </group>
+                                    
+                            </group>
+                            <group string="通知營安處">
+                                    <group>
+                                        <field name="inform_campingoffice_time" string="通知營安處時間" attrs="{'readonly': [('inform_campingoffice_time', '=', False)]}" style="width:20em;"/>
+                                    </group>
+                                    <group>
+                                        <button name="refresh_campingoffice_time" type="object" string="refresh" class="btn-primary" />
+                                    </group>
+                                    <group>
+                                        <field name="is_active5" string="有到達現場" attrs="{'readonly': [('is_active6', '=', True)]}"/>
+                                        <field name="is_active6" string="沒有到達現場" attrs="{'readonly': [('is_active5', '=', True)]}"/>
+                                    </group>    
+                            </group>
+                            
+                                <group string="通報事故地點">
+                                        <field name="is_active7" string="T1" attrs="{'readonly': [('is_active8', '=', True)]}"/>
+                                        <field name="active7_yes" string="名稱" attrs="{'invisible': [('is_active7', '=', False)]}"/>
+                                        <field name="is_active8" string="T2" attrs="{'readonly': [('is_active7', '=', True)]}"/>
+                                        <field name="active8_yes" string="名稱" attrs="{'invisible': [('is_active8', '=', False)]}"/>
+                                        <field name="informing_place_input_field" string="其他地點"/>
+                                </group>
+                                <group string="醫護抵達紀錄">
+                                    <group>
+                                        <field name="arriving_time" string="醫護抵達時間" attrs="{'readonly': [('arriving_time', '=', False)]}" style="width:20em;"/>
+                                    </group>
+                                    <group>
+                                         <button name="refresh_arriving_time" string="refresh" type="object" class="btn-primary"/>
+                                    </group>
+                                    <group>
+                                        <field name="is_active9" string="於十分鐘內抵達" attrs="{'readonly': [('is_active10', '=', True)]}"/>
+                                        <field name="is_active10" string="於十分鐘後抵達" attrs="{'readonly': [('is_active9', '=', True)]}"/>
+                                        <field name="arrive_in10mins_input_field" string="原因" attrs="{'invisible': [('is_active10', '=', False)]}"/>
+                                    </group>    
+                                </group>
+
+                            <group string="檢查時間">
+                                <group>
+                                    <field name="checking_time" string="檢查時間" attrs="{'readonly': [('checking_time', '=', False)]}"/>
+                                </group>
+                                <group>
+                                    <button name="refresh_checking_time" string="refresh" type="object" class="btn-primary"/>
+                                </group>  
+                                    
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

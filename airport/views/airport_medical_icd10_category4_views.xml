@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="airport_medical_icd10_category4_action" model="ir.actions.act_window">
+        <field name="name">內分泌，營養和代謝疾病</field>
+        <field name="res_model">airport.medical.icd10.category4</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="airport_medical_icd10_category4_view_tree" model="ir.ui.view">
+        <field name="name">airport.medical.icd10.category4.tree</field>
+        <field name="model">airport.medical.icd10.category4</field>
+        <field name="arch" type="xml">
+            <tree string="Channel" editable="bottom">
+                <field name="name" string="內分泌，營養和代謝疾病名稱"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="airport_medical_icd10_category4_view_form" model="ir.ui.view">
+        <field name="name">airport.medical.icd10.category4.form</field>
+        <field name="model">airport.medical.icd10.category4</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <field name="name" string="內分泌，營養和代謝疾病名稱"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

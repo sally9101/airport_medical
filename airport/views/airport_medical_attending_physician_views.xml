@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="airport_medical_attending_physician_action" model="ir.actions.act_window">
+        <field name="name">負責醫師</field>
+        <field name="res_model">airport.medical.attending.physician</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="airport_medical_attending_physician_view_tree" model="ir.ui.view">
+        <field name="name">airport.medical.attending.physician.tree</field>
+        <field name="model">airport.medical.attending.physician</field>
+        <field name="arch" type="xml">
+            <tree string="Channel" editable="bottom">
+                <field name="name" string="負責醫師姓名"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="airport_medical_attending_physician_view_form" model="ir.ui.view">
+        <field name="name">airport.medical.attending.physician.form</field>
+        <field name="model">airport.medical.attending.physician</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <field name="name" string="負責醫師姓名"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

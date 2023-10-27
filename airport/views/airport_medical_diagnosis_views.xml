@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="airport_medical_diagnosis_action" model="ir.actions.act_window">
+        <field name="name">診斷</field>
+        <field name="res_model">airport.medical.diagnosis</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="airport_medical_diagnosis_view_tree" model="ir.ui.view">
+        <field name="name">airport.medical.diagnosis.tree</field>
+        <field name="model">airport.medical.diagnosis</field>
+        <field name="arch" type="xml">
+            <tree string="Channel" editable="bottom">
+                <field name="icd10_cm" string="ICD-10編碼"/>
+                <field name="use" string="是否使用"/>
+                <field name="name_en" string="英文名稱"/>
+                <field name="name_ch" string="中文名稱"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="airport_medical_diagnosis_view_form" model="ir.ui.view">
+        <field name="name">airport.medical.diagnosis.form</field>
+        <field name="model">airport.medical.diagnosis</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <field name="icd10_cm" string="ICD-10編碼"/>
+                        <field name="use" string="是否使用"/>
+                        <field name="name_en" string="英文名稱"/>
+                        <field name="name_ch" string="中文名稱"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="airport_medical_diagnosis_view_search" model="ir.ui.view">
+        <field name="name">airport.medical.diagnosis.search</field>
+        <field name="model">airport.medical.diagnosis</field>
+        <field name="arch" type="xml">
+            <search string="Test">
+                <field name="name_en" string="英文名稱"/>
+                <field name="name_ch" string="中文名稱"/>
+            </search>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="airport_medical_bill_action" model="ir.actions.act_window">
+        <field name="name">帳單管理</field>
+        <field name="res_model">airport.medical.bill</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="airport_medical_bill_view_tree" model="ir.ui.view">
+        <field name="name">airport.medical.bill.tree</field>
+        <field name="model">airport.medical.bill</field>
+        <field name="arch" type="xml">
+            <tree string="Channel" editable="bottom">
+                <field name="name" string="姓名"/>
+                <field name="Date" string="日期"/>
+                <field name="visitfee" string="出診費"/>
+                <field name="ambulancefee" string="救護車費用"/>
+                <field name="cash" string="現金" />
+                <field name="creditcard" string="刷卡" />
+                <field name="pleasepay" string="請款"/>
+                <field name="total_fee" string="總金額"/>
+                <field name="payment_status" filters="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="airport_medical_bill_view_form" model="ir.ui.view">
+        <field name="name">airport.medical.bill.form</field>
+        <field name="model">airport.medical.bill</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <field name="name" string="姓名"/>
+                        <field name="Date" string="日期"/>
+                        <field name="visitfee" string="出診費"/>
+                        <field name="ambulancefee" string="救護車費用"/>
+                        <field name="cash" string="現金" />
+                        <field name="creditcard" string="刷卡" />
+                        <field name="pleasepay" string="請款"/>
+                        <field name="total_fee" string="總金額"/>
+                        <field name="payment_status" filters="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

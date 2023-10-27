@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="paperformat_a4_portrait_report"  model="report.paperformat">
+        <field name="name">A4 Portrait Report Paper</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10.00</field>
+        <field name="margin_bottom">10.00</field>
+        <field name="margin_left">7.0</field>
+        <field name="margin_right">7.0</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="paperformat_a4_landscape_report"  model="report.paperformat">
+        <field name="name">A4 Landscape Report Paper</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">10.00</field>
+        <field name="margin_bottom">10.00</field>
+        <field name="margin_left">7.0</field>
+        <field name="margin_right">7.0</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="report_for_airport_medical" model="ir.actions.report">
+        <field name="name">緊急醫療救護申請單</field>
+        <field name="model">airport.medical</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">airport.visitreport</field>
+        <field name="report_file">airport.visitreport</field>
+        <field name="binding_model_id" ref="model_airport_medical"/>
+        <field name="paperformat_id" ref="paperformat_a4_portrait_report" />
+        <field name="binding_type">report</field>
+        <field name="print_report_name">"緊急醫療救護申請單-%s" % (object.name)</field>
+    </record>
+    <record id="certificate_ch_report_for_airport_medical" model="ir.actions.report">
+        <field name="name">中文診斷證明書</field>
+        <field name="model">airport.medical</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">airport.certificatechreport</field>
+        <field name="report_file">airport.certificatechreport</field>
+        <field name="binding_model_id" ref="model_airport_medical"/>
+        <field name="paperformat_id" ref="paperformat_a4_portrait_report" />
+        <field name="binding_type">report</field>
+        <field name="print_report_name">"中文診斷證明書-%s" % (object.name)</field>
+    </record>
+    <record id="telecommunication_report_for_airport_medical" model="ir.actions.report">
+        <field name="name">電傳文件</field>
+        <field name="model">airport.medical</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">airport.telecommunicationreport</field>
+        <field name="report_file">airport.telecommunicationreport</field>
+        <field name="binding_model_id" ref="model_airport_medical"/>
+        <field name="paperformat_id" ref="paperformat_a4_portrait_report" />
+        <field name="binding_type">report</field>
+        <field name="print_report_name">"聯新國際醫院-電傳文件-%s" % (object.name)</field>
+    </record>
+</odoo>

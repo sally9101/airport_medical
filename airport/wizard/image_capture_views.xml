@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--Image Capture view and action-->
+    <record id="image_capture_action" model="ir.actions.act_window">
+        <field name="name">Image Capture</field>
+        <field name="res_model">image.capture</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="image_capture_view_form" model="ir.ui.view">
+        <field name="name">image.capture.view.form</field>
+        <field name="model">image.capture</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    
+                    <video id="player" controls="true" class="d-none"
+                           autoplay="true" style="width: 500px;padding: 20px;" muted="true" playsinline="true"/>
+                    <canvas class="d-none" id="snapshot" width="320"
+                            height="240" style="width: 500px; padding: 20px;"/>
+                    <input type="hidden" name="image" id="image"/>
+                    <group>
+                        <field name="ocr_result"  widget="text" readonly="1" invisible="true" />
+                       <field name="mrz_result"  widget="text" readonly="1" invisible="true" />
+                        <field name="source_model"  readonly="1" invisible="true" />
+                        
+                    </group>
+                    <div id="ocr_result" width="500px" height="500px"></div>
+                    <div id="mrz_result" width="500px" height="500px"></div>
+                </sheet>
+                <footer>
+                    <div id="camera" class="btn btn-primary"
+                         t-on-click="OnClickOpenCamera">開啟相機
+                    </div>
+                    <div id="capture" class="btn btn-primary d-none"
+                         t-on-click="OnClickCaptureImage">拍照
+                    </div>
+                    <div id="save_image" class="btn btn-primary d-none"
+                         t-on-click="OnClickSaveImage">辨識掃描
+                    </div>
+                    <div id="close_camera" class="btn btn-primary"
+                         t-on-click="OnClickCloseCamera">關閉相機
+                    </div>
+                    <div id="toggleCamera" class="btn btn-primary"
+                         t-on-click="OnClickChangeCamera">切換鏡頭
+                    </div>
+                    <div id="fill_text" class="btn btn-primary"
+                         t-on-click="autoFillOcrResult">填入結果
+                    </div>
+                    <button string="取消" class="btn btn-default"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

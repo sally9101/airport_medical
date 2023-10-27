@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="airport_medical_attending_nurse_action" model="ir.actions.act_window">
+        <field name="name">隨行護士</field>
+        <field name="res_model">airport.medical.attending.nurse</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="airport_medical_attending_nurse_view_tree" model="ir.ui.view">
+        <field name="name">airport.medical.attending.nurse.tree</field>
+        <field name="model">airport.medical.attending.nurse</field>
+        <field name="arch" type="xml">
+            <tree string="Channel" editable="bottom">
+                <field name="name" string="隨行護士姓名"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="airport_medical_attending_nurse_view_form" model="ir.ui.view">
+        <field name="name">airport.medical.attending.nurse.form</field>
+        <field name="model">airport.medical.attending.nurse</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <field name="name" string="隨行護士姓名"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

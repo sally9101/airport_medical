@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="airport_medical_reporting_action" model="ir.actions.act_window">
+        <field name="name">報表</field>
+        <field name="res_model">airport.medical</field>
+        <field name="view_mode">graph,pivot</field>
+    </record>
+
+    <record id="airport_medical_reporting_view_graph" model="ir.ui.view">
+        <field name="name">airport.medical.graph</field>
+        <field name="model">airport.medical</field>
+        <field name="arch" type="xml">
+            <graph string="Reporting" type="bar">
+                <field name="incident_date" interval="day" type="row"/>
+                <field name="id" type="col" />
+             </graph>
+        </field>
+    </record>
+
+</odoo>

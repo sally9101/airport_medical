@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+ <!--緊急救護-->
+    <template id="airport.visitreport">
+        <t t-foreach="docs" t-as="medical">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div style="text-align: center;">
+                            <div>
+                                <h2 style="font-weight: bold; color: #000000;">聯新國際醫院桃園國際機場醫療中心－緊急醫療救護申請單</h2>
+                            </div>
+                        </div>
+                        <p/>
+
+                        <div>
+                            <div style="font-size: 18pt; font-weight: bold;">
+                                基本資料
+                            </div>
+                        </div>
+                        <p/>
+                        <table class="table border border-dark" style="width: 100%;">
+                            <tr>
+                                <td class="border border-dark">病人姓名：<span t-field="medical.name" /></td>
+                                <td class="border border-dark">生日：<span t-field="medical.birthday" /></td>
+                                <td class="border border-dark">性別：<span t-field="medical.sex_id" /></td>
+                                <td class="border border-dark">身分：<span t-field="medical.identity_id" /></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-dark">護照號碼：<span t-field="medical.password_no" /></td>
+                                <td colspan="3" class="border border-dark">國籍：<span t-field="medical.nationality_id" /></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-dark">航空公司： <span t-field="medical.airport_co_id" /></td>
+                                <td class="border border-dark">班機：<span t-field="medical.Airplane" /></td>
+                                <td colspan="2" class="border border-dark">日期：<span t-field="medical.incident_date" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="border border-dark">地址：<span t-field="medical.Address" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="border border-dark">聯絡電話：<span t-field="medical.Phone" /></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-dark">出發地：<span t-field="medical.departure_id" /></td>
+                                <td class="border border-dark">經過地：<span t-field="medical.passing_id" /></td>
+                                <td colspan="2" class="border border-dark">目的地：<span t-field="medical.arrival_id" /></td>
+                            </tr>
+                        </table>
+
+                        <div>
+                            <div style="font-size: 18pt; font-weight: bold;">
+                                通報作業
+                            </div>
+                        </div>
+                        <p/>
+                        <table class="table border border-dark" style="width: 100%;">
+                            <tr>
+                                <td class="border border-dark" colspan="2">落地前通知，落地時間：
+                                    <br/>
+                                    <span t-field="medical.landing_time" />
+                                </td>
+                                <td class="border border-dark">通報時間：
+                                    <br/>
+                                    <span t-field="medical.informing_time" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border border-dark" colspan="2">
+                                    通報單位/人員：
+                                    <span t-field="medical.reporting_unit" />/<span t-field="medical.reporting_unit_personnel" />
+                                </td>
+                                <td class="border border-dark">電話：<span t-field="medical.reporting_unit_personnel_phone" /></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-dark" colspan="2">通報營安處時間：<span t-field="medical.inform_campingoffice_time" /></td>
+                                <td class="border border-dark">
+                                    營安處到達現場：
+                                    <t t-if="medical.is_active5 == True">
+                                        <span>是</span>
+                                    </t>
+                                    <t t-else="">
+                                        <span>否</span>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="border border-dark">
+                                    通報事故地點：
+                                    <t t-if="medical.informing_place_input_field != ''">
+                                        <t t-if="medical.active7_yes != ''">
+                                            <span t-field="medical.active8_yes" />
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="medical.active7_yes" />
+                                        </t>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="medical.informing_place_input_field" />
+                                    </t>
+                                </td>
+                                <td class="border border-dark">醫護抵達時間：<span t-field="medical.arriving_time" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="border border-dark">
+                                    10分鐘內到達：
+                                    <t t-if="medical.is_active9 == True">
+                                        <span>是</span>
+                                    </t>
+                                    <t t-else="">
+                                        <span>否</span>
+                                    </t>
+                                </td>
+                                <td class="border border-dark">檢查時間：<span t-field="medical.checking_time" /></td>
+                            </tr>
+                        </table>
+
+                        <div>
+                            <div style="font-size: 18pt; font-weight: bold;">
+                                醫療收費
+                            </div>
+                        </div>
+                        <p/>
+                        <table class="table border border-dark" style="width: 100%;">
+                            <tr>
+                                <td class="border border-dark">出診費：<span t-field="medical.visitfee" /></td>
+                                <td class="border border-dark">救護車費用：<span t-field="medical.ambulancefee" /></td>
+                                <td class="border border-dark" colspan="2">
+                                    <t t-if="medical.selfpay == True">
+                                        付款方式:自付
+                                    </t>
+                                    <t t-else="">付款方式:請款</t>
+                                </td>
+                            </tr>
+                            <t t-if="medical.selfpay == True">
+                                <t t-if="medical.cash == True">
+                                    <t t-if="medical.twd == True">
+                                        <tr>
+                                            <td colspan="4" class="border border-dark">
+                                                付款方式：現金<span t-field="medical.afterexchange" />台幣
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-else="">
+                                        <tr>
+                                            <td colspan="4" class="border border-dark">
+                                                付款方式：現金
+                                                <span t-field="medical.currencies" />，
+                                                兌換後=台幣<span t-field="medical.afterexchange" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <t t-if="medical.billing_discrepancy_check != true">
+                                        <tr>
+                                            <td colspan="4" class="border border-dark">付款方式：刷卡</td>
+                                        </tr>
+                                    </t>
+                                    <t t-else="">
+                                        <tr>
+                                            <td class="border border-dark">付款方式：刷卡</td>
+                                            <td colspan="3" class="border border-dark">
+                                                收費異常，原因：<span t-field="medical.abnormalreason" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <tr>
+                                    <td class="border border-dark">申請人：<span t-field="medical.applicant" /></td>
+                                    <td class="border border-dark">申請單位：<span t-field="medical.applicantunit" /></td>
+                                    <td colspan="2" class="border border-dark">聯絡電話：<span t-field="medical.phonenumber" /></td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td colspan="2" class="border border-dark" style="width: 50%; text-align: center;">內容</td>
+                                <td class="border border-dark" style="width: 25%; text-align: center;">同意人簽名/身分</td>
+                                <td class="border border-dark" style="width: 25%; text-align: center;">見證人簽名/身分</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="border border-dark" style="text-align: center; vertical-align: middle;">
+                                     瞭解醫護人員說明需醫療收費之緣由且同意
+                                    <br/>
+                                    Understand the medical charge and agree to it.
+                                </td>
+                                <td class="border border-dark">
+                                    <t t-if="medical.agreeperson1">
+                                        <span t-field="medical.agreeperson1" t-options-widget="'image'" />
+                                    </t>
+                                </td>
+                                <td class="border border-dark">
+                                    <t t-if="medical.witness1">
+                                        <span t-field="medical.witness1" t-options-widget="'image'" />
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                            <div>
+                                <div style="font-size: 18pt; font-weight: bold;">
+                                    疾病管制署篩檢
+                                </div>
+                            </div>
+                            <p/>
+                            <table class="table border border-dark" style="width: 100%;">
+                                <tr>
+                                    <td class="border border-dark" style="width: 50%;">
+                                        健康評估：
+                                        <br/>
+                                            姓名：<span t-out="medical.name" /> /
+                                            關係：<span t-out="medical.relation" /> /
+                                            體溫：<span t-out="medical.temperature" /> ℃
+                                        <br/>
+                                    </td>
+                                </tr>
+                            </table> 
+                    </div>
+                    <div class="page">
+                        <div>
+                            <div style="font-size: 18pt; font-weight: bold;">
+                                病情摘要
+                            </div>
+                        </div>
+                        <p/>
+                        <table class="table border border-dark" style="width: 100%;">
+                            <tr>
+                                <td colspan="5" class="border border-dark">
+                                    主訴:<span t-field="medical.chief_complaint_id" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border border-dark" style="width: 20%">
+                                    體溫：<span t-field="medical.temperature" />℃
+                                </td>
+                                <td class="border border-dark" style="width: 20%">
+                                    脈搏：<span t-field="medical.pulse" />次/min
+                                </td>
+                                <td class="border border-dark" style="width: 20%">
+                                    呼吸：<span t-field="medical.breath" />次/min
+                                </td>
+                                <td class="border border-dark" style="width: 20%">
+                                    血壓：<span t-field="medical.blood_pressureh" />mmHg
+                                </td>
+                                <td class="border border-dark" style="width: 20%">
+                                    血氧：<span t-field="medical.blood_oxygen" />%
+                                </td>
+                            </tr>
+                            <tr>
+                                <t t-if="medical.is_active1 == true">
+                                    <td colspan="5" class="border border-dark">意識：Clear</td>
+                                </t>
+                                <t t-else="">
+                                    <td colspan="5" class="border border-dark">
+                                        意識：GCS：<span t-field="medical.is_active2" />
+                                        (
+                                        E<u><span t-field="medical.input_field_E" /></u>&#160;&#160;
+                                        V<u><span t-field="medical.input_field_V" /></u>&#160;&#160;
+                                        M<u><span t-field="medical.input_field_M" /></u>&#160;&#160;
+                                        昏迷指數總分<u><span t-field="medical.total_score" /></u>&#160;&#160;
+                                        昏迷程度<u><span t-field="medical.comatose_level" /></u>
+                                        )
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-if="medical.is_no == true">
+                                    <td colspan="5" class="border border-dark">過去病史：無</td>
+                                </t>
+                                <t t-else="">
+                                    <td colspan="5" class="border border-dark">
+                                        過去病史：<span t-out="medical.input_field1" />&#160;
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                               <t t-if="medical.is_active3 == true">
+                                    <td colspan="5" class="border border-dark">藥物過敏：無</td>
+                                </t>
+                                <t t-else="">
+                                    <td colspan="5" class="border border-dark">
+                                        藥物過敏：<span t-out="medical.input_field" />&#160;
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="border border-dark">
+                                    初步診斷：
+                                    <br/>
+                                    <span t-field="medical.diagnosis_id" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="border border-dark" style="width: 50%; text-align: center;">傷口照片</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="border border-dark">
+                                    <span t-field="medical.photo" t-options-widget="'image'" />
+                                </td>
+                                <td colspan="3" class="border border-dark">
+                                    <span t-field="medical.photo1" t-options-widget="'image'" />
+                                </td>
+                            </tr>
+                        </table>                     
+                            
+                        <!--放傷口照片-->
+                        <div>
+                            <div style="font-size: 18pt; font-weight: bold;">
+                                處理摘要
+                            </div>
+                        </div>
+                        <p/>
+                        <table class="table border border-dark" style="width: 100%;">   
+                        
+                            <tr>
+                                <t t-if="medical.referral == true ">
+                                    <td  class="border border-dark" style="width: 30%">
+                                        處理摘要：建議轉診至<span t-out="medical.input_field_hospital" />醫院
+                                    </td>
+                                </t>
+                                <t t-else="">
+                                    <td class="border border-dark" style="width: 30%">是否需轉診:無須轉診</td>
+                                </t>
+                                <t t-if="medical.Quadruple_single == true ">
+                                    <td class="border border-dark" style="width: 30%">是否有簽四聯單:有</td>
+                                </t>
+                                <t t-else="">
+                                    <td class="border border-dark" style="width: 30%">是否有簽四聯單:沒有</td>
+                                </t>
+                                <td colspan="2" class="border border-dark" style="width: 40%">
+                                    醫師： <span t-field="medical.attending_physician_id"  />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <!--護理紀錄-->
+    <!--
+    <template id="airport.nursingreport">
+        <t t-foreach="docs" t-as="medical">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <table class="table border-0 border-white" style="width: 100%;">
+                            <tr class="border-0 border-white">
+                                <td class="border-0 border-white" style="width: 33%;">姓名：<span t-field="medical.name" /></td>
+                                <td class="border-0 border-white" style="width: 33%;">性別:<span t-field="medical.sex_id" /></td>
+                                <td class="border-0 border-white" style="width: 33%;">護照號碼:<span t-field="medical.password_no" /></td>
+                            </tr>
+                        </table>
+                        <table class="table border border-dark" style="width: 100%;">
+                            <tr>
+                                <td class="border border-dark" style="width: 80%">紀錄</td>
+                                <td class="border border-dark" style="width: 20%">簽名</td>
+                            </tr>
+                            <t t-foreach="medical.nursing_documentation_ids" t-as="nursing">
+                                <tr>
+                                    <td class="border border-dark"><span t-field="nursing.documentation" /></td>
+                                    <t t-if="nursing.nurse_signature">
+                                        <td class="border border-dark"><span t-field="nursing.nurse_signature" t-options-widget="'image'" /></td>
+                                    </t>
+                                    <t t-else="">
+                                        <td class="border border-dark"><span t-field="nursing.nurse_signature" /></td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+
+                    <div class="footer">
+                        <div style="text-align: center;">
+                            <div>
+                                第&#160;&#160;<span class="page"/>&#160;&#160;頁
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    -->
+    <!--診斷證明-->
+    <template id="airport.certificatechreport">
+        <t t-foreach="docs" t-as="medical">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td colspan="6" style="border: 1pt solid black; text-align: center;">
+                                    <div>
+                                        <h1 style="font-weight: bold; color: #000000; padding: 50px;">
+                                            聯新國際醫院桃園國際機場醫療中心
+                                            <br/>
+                                            診斷證明書
+                                        </h1>
+                                    </div>
+                                </td>
+                                <td rowspan="6"
+                                    class="border-white"
+                                    style="width: 1%; word-break: break-all; font-size: 20pt; padding: 10px; vertical-align: middle;">
+                                    ◎本證明書須加蓋本院印章否則無效◎
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1pt solid black; width: 10%; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">姓&#160;&#160;名</div>
+                                </td>
+                                <td colspan="5" style="border: 1pt solid black;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        <span t-field="medical.name" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        出&#160;&#160;生
+                                        日&#160;&#160;期
+                                    </div>
+                                </td>
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        <span t-field="medical.birthday" />
+                                    </div>
+                                </td>
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        性&#160;&#160;&#160;&#160;別
+                                    </div>
+                                </td>
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        <span t-field="medical.sex_id" />
+                                    </div>
+                                </td>
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        護照號碼
+                                        <br/>
+                                    </div>
+                                </td>
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        <span t-field="medical.password_no" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="height: 200pt;">
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        診
+                                        <br/>
+                                        斷
+                                    </div>
+                                </td>
+                                <td colspan="5" style="border: 1pt solid black;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        <span t-field="medical.icd10_category_id" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="height: 250pt;">
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        醫<br/>師<br/>囑<br/>言<br/>或<br/>備<br/>註
+                                    </div>
+                                </td>
+                                <td colspan="5" style="border: 1pt solid black;">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        <span t-field="medical.comment_id" />
+                                        <span t-field="medical.doctor_remark" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1pt solid black;">
+                                    <div style="font-size: 20pt; padding: 20px;">
+                                        以&#160;上&#160;病&#160;人&#160;經&#160;本&#160;院&#160;醫&#160;師&#160;診&#160;斷&#160;屬&#160;實&#160;特&#160;予&#160;證&#160;明&#160;
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                    <div class="page">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        院長
+                                    </div>
+                                </td>
+                                <td colspan="5" style="border: 1pt solid black;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        <span t-field="medical.sup_sign" t-options-widget="'image'"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1pt solid black; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        診治醫師
+                                    </div>
+                                </td>
+                                <td colspan="5" style="border: 1pt solid black;">
+                                    <div style="font-size: 20pt; padding: 10px;">
+                                        <span t-field="medical.doctor_sign" t-options-widget="'image'"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1pt solid black;">
+                                    <div style="font-size: 20pt; padding: 20px;">
+                                        開業執照號碼：桃衛醫診字第3432060513號
+                                        <p/>
+                                        西元<span t-field="medical.incident_date" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+    <!--電傳文件-->
+    <template id="airport.telecommunicationreport">
+        <t t-foreach="docs" t-as="medical">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div style="color: #000000; text-align: center;">
+                            <span style="color: #000000; font-size: 30pt">聯新國際醫院</span>
+                            <span style="font-size: 16pt;">桃園國際機場醫療中心</span>
+                            <br/>
+                            <div>LANDSEED MEDICAL CLINIC AT TAIWAN TAOYUAN INTERNATIONAL AIRPORT</div>
+                        </div>
+                        <h2 style="font-weight: bold; color: #000000; text-align: center; margin-top: 50px;">
+                            出診診療服務電傳文件
+                        </h2>
+
+                        <table style="width: 100%;" class="table border border-dark">
+                            <tr style="border: 1pt solid black">
+                                <td colspan="4" style="border: 1pt solid white" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        TO：桃園國際機場股份有限公司營運安全處
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr style="border: 1pt solid black">
+                                <td colspan="4" style="border: 1pt solid white" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        FROM：聯新國際醫院桃園國際機場醫療中心
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border: 1pt solid white; width:50%;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        病患姓名： <span t-field="medical.name" />
+                                    </div>
+                                </td>
+                                <td colspan="2" style="border: 1pt solid white; width: 50%;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        國籍：
+                                        <t t-if="medical.nationality_id.name != '其他國籍'">
+                                            <span t-field="medical.nationality_id" />
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="medical.nationality_other_id" />
+                                        </t>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border: 1pt solid white; width:60%;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        出生年月日：西元<span t-field="medical.birthday" />
+                                    </div>
+                                </td>
+                                <td colspan="2" style="border: 1pt solid white; width: 40%;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        性別：<span t-field="medical.sex_id" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <t>
+                                    <td style="border: 1pt solid white;width:30%;" class="table border border-dark">
+                                        <div style="font-size: 18pt; padding: 10px;">
+                                            航空公司：
+                                            <t>
+                                                <span t-field="medical.airport_co_id" />
+                                            </t>
+                                        </div>
+                                    </td>
+                                    <td style="border: 1pt solid white; width:30%;" class="table border border-dark">
+                                        <div style="font-size: 18pt; padding: 10px;">
+                                            班機： <span t-field="medical.Airplane" />
+                                        </div>
+                                    </td>
+                                    <td style="border: 1pt solid white;width:40%;" class="table border border-dark">
+                                        <div style="font-size: 18pt; padding: 10px;">
+                                            出境/入境：<span t-field="medical.exit_id" />
+                                        </div>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td  style="border: 1pt solid white;width:30%;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        啟程地:
+                                        <t>
+                                            <span t-field="medical.departure_id" />
+                                        </t>
+                                    </div>
+                                </td>
+                                <td style="border: 1pt solid white;width:30%;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        經過地: <span t-field="medical.passing_id" />
+                                    </div>
+                                </td>
+                                <td style="border: 1pt solid white;width:40%;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        目的地：<span t-field="medical.arrival_id" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border: 1pt solid white;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        發生日期：西元<span t-field="medical.incident_date" />
+                                    </div>
+                                </td>
+                                <td colspan="2" style="border: 1pt solid white;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        地點：<span t-field="medical.incident_place_id" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border: 1pt solid white;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        通報單位：<span t-field="medical.reporting_unit" />
+                                    </div>
+                                </td>
+                                <td colspan="2" style="border: 1pt solid white;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        通報人員：<span t-field="medical.reporting_unit_personnel" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border: 1pt solid white;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        通報時間：<span t-field="medical.informing_time" />
+                                    </div>
+                                </td>
+                                <td colspan="2" style="border: 1pt solid white;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        診療時間：<span t-field="medical.clinic_time" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="border: 1pt solid white;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        初步診斷：
+                                        <br/>
+                                        <span t-field="medical.diagnosis_id" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="border: 1pt solid white;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        後續結果： <span t-out="medical.follow_up_results" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="border: 1pt solid white;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                            收費金額:<span t-out="medical.charge_amount" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style=" border: 1pt solid white; width:50%;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        醫師：<span t-field="medical.doctor_sign" t-options-widget="'image'" />
+                                    </div>
+                                </td>
+                                 <td colspan="2" style=" border: 1pt solid white; width:50%;" class="table border border-dark">
+                                    <div style="font-size: 18pt; padding: 10px;">
+                                        院長：<span t-field="medical.sup_sign" t-options-widget="'image'" />
+                                    </div>
+                                </td>
+                                <!--
+                                <t t-if="medical.sup_sign">
+                                    <td colspan="2" style=" border: 1pt solid white; width:50%;">
+                                        <div style="font-size: 18pt; padding: 10px;">
+                                            院長：<span t-field="medical.sup_sign" t-options-widget="'image'" />
+                                        </div>
+                                    </td>
+                                </t>
+                                <t t-else="">
+                                    <td colspan="2" style=" border: 1pt solid white; width:50%;">
+                                        <div style="font-size: 18pt; padding: 10px;">
+                                            護理師：<span t-out="medical.attending_nurse_id" />
+                                        </div>
+                                        </div>
+                                    </td>s
+                                </t>-->
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
+
+
